@@ -1,6 +1,7 @@
 package com.example.cuadricula
 
 import android.os.Bundle
+import android.provider.ContactsContract
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -45,9 +46,28 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    TopicGrid(
+                        topicList = DataSource.topics,
+                        modifier = Modifier.fillMaxSize().padding(8.dp)
+                    )
 
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun TopicGrid(topicList: List<Topic>, modifier: Modifier) {
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = modifier
+    ) {
+        items(topicList) { topic ->
+            TopicCard(topic = topic)
+
         }
     }
 }
@@ -100,6 +120,6 @@ fun TopicCard(topic: Topic, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     CuadriculaTheme {
-        TopicCard(topic = Topic(R.string.photography, 321, R.drawable.photography))
+        TopicGrid(topicList = DataSource.topics, modifier = Modifier)
     }
 }
