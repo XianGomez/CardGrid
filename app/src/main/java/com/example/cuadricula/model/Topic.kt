@@ -1,0 +1,12 @@
+package com.example.cuadricula.model;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.StringRes;
+
+data class Topic (
+    @StringRes val courseName: Int,
+    val availableCourses: Int,
+    @DrawableRes val imageRes: Int
+)
+
+
